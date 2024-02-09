@@ -1,4 +1,9 @@
-const express = require("express");
+// const express = require("express");
+// const {MongoClient}= require('mongodb');
+
+import express from "express";
+import { MongoClient } from "mongodb";
+
 const app = express();
 const port = 7000;
 
@@ -71,6 +76,17 @@ const movies = [
   },
 ];
 
+const MONGO_URL = "mongodb://localhost:27017";
+
+async function createConnection() {
+  const client = new MongoClient(MONGO_URL);
+  await client.connect();
+  console.log("mongo is connected ");
+  return client;
+}
+
+const client = await createConnection();
+
 app.get("/", (req, res) => {
   res.send("hello guys");
 });
@@ -80,14 +96,6 @@ app.get("/", (req, res) => {
 //   res.send(movies);
 // });
 
-//movies/id
-app.get("/movies/:id", (req, res) => {
-  const { id } = req.params;
-  console.log(id);
-  const movie = movies.find((mo) => mo.id == id);
-
-  res.send(movie);
-});
 
 //get language
 app.get("/movies", (req, res) => {
@@ -101,6 +109,19 @@ app.get("/movies", (req, res) => {
     filteredMovies = filteredMovies.filter((mo) => (mo.rating = rating));
   }
   res.send(filteredMovies);
+});
+
+//movies/id
+app.get("/movies/:id", async (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+  const movie = await client
+    .db("movies")
+    .collection("movies")
+    .findOne({ id: 1 });
+  //const movie = movies.find((mo) => mo.id == id);
+
+  res.send(movie);
 });
 
 //to get port
