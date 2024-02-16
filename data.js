@@ -25,7 +25,7 @@ export async function EditMovies(id, updateMovies) {
 }
 
 export async function genPassword(password) {
-  const salt = await bcrypt.genSalt(10);
+  const salt = await bcrypt.genSalt(10);  //use to salting the password using bcrypt 
   console.log(salt);
   const hashPass = await bcrypt.hash(password, salt);
   console.log(hashPass);
