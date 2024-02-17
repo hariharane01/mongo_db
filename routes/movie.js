@@ -10,7 +10,7 @@ import express from "express";
 const router = express.Router();
 //get language
 
-router.get("/", auth,async (req, res) => {
+router.get("/",async (req, res) => {
   const { language, rating } = req.query;
   console.log(req.query, language);
 
