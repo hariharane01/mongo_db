@@ -23,7 +23,7 @@ async function createConnection() {
 
 export const client = await createConnection();
 
-app.use(express.json());
+app.use(express.json()); //interceptor || converting body to json
 
 app.get("/", (req, res) => {
   res.send("hello guys");
@@ -34,6 +34,6 @@ app.use("/user", userRouters)
 
 //to get port
 app.listen(port, () => {
-  console.log("server on port", port);
+  console.log("server on port", port); 
 });
 

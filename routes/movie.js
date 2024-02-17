@@ -5,10 +5,12 @@ import {
   deleteMoviesById,
   EditMovies,
 } from "../data.js";
-import  express from "express";
-const router= express.Router();
+import { auth } from "../middleware/auth.js";
+import express from "express";
+const router = express.Router();
 //get language
-router.get("/", async (req, res) => {
+
+router.get("/", auth,async (req, res) => {
   const { language, rating } = req.query;
   console.log(req.query, language);
 
@@ -54,4 +56,4 @@ router.put("/:id", async (req, res) => {
   res.send(result);
 });
 
-export const movieRouter=router;
+export const movieRouter = router;
