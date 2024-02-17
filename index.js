@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
   res.send("hello guys");
 });
 
-app.use("/movies", movieRouter)
+app.use("/movie", movieRouter)
 app.use("/user", userRouters)
 
 //to get port
