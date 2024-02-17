@@ -1,14 +1,16 @@
 // const express = require("express");
 // const {MongoClient}= require('mongodb');
 import "dotenv/config"; // to configure the dotenv
+import cors from "cors";
 import express from "express";
 import { MongoClient } from "mongodb";
 import { movieRouter } from "./routes/movie.js";
 import { userRouters } from "./routes/user.js";
 
 
-console.log(process.env.MONGO_URL);
+// console.log(process.env.MONGO_URL);
 const app = express();
+app.use(cors());
 const port = process.env.port;
 
 // const MONGO_URL = "mongodb://localhost:27017";
